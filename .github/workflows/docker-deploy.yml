@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  packages: write
 
 jobs:
   test:
@@ -51,6 +52,13 @@ jobs:
           username: weelllliii0604
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         with:
@@ -60,3 +68,7 @@ jobs:
           tags: |
             weelllliii0604/refcard02:latest
             weelllliii0604/refcard02:${{ github.sha }}
+            ghcr.io/weelllliii/refcard02:latest
+            ghcr.io/weelllliii/refcard02:${{ github.sha }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
