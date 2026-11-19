@@ -58,5 +58,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            weelllliii0604/refcard01:latest
-            weelllliii0604/refcard01:${{ github.sha }}
+            weelllliii0604/refcard02:latest
+            weelllliii0604/refcard02:${{ github.sha }}
